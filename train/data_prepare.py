@@ -143,12 +143,12 @@ if __name__ == "__main__":
     for idx2, name in enumerate(vowels):
       for idx3, size in enumerate(sizes):
         prepare_original_data(folder, name, data,
-                              "./%s/%s/%s.txt" % (folder, size, name))
+                              "./data/%s/%s/%s.txt" % (folder, size, name))
     # consonant data
     for idx2, name in enumerate(consonants):
       for idx3, size in enumerate(sizes):
         prepare_original_data(folder, name, data,
-                              "./%s/%s/%s.txt" % (folder, size, name))
+                              "./data/%s/%s/%s.txt" % (folder, size, name))
   #generate_negative_data(data)
   print("data_length: " + str(len(data)))
   if not os.path.exists("./data"):
