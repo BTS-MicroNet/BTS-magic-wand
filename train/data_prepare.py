@@ -143,7 +143,7 @@ if __name__ == "__main__":
       # vowel data
       for idx2, name in enumerate(vowels):
         for idx3, size in enumerate(sizes):
-          prepare_original_data(folder, name, data,
+          prepare_original_data(name, folder, data,
                                 "./data/%s/%s/%s.txt" % (folder, size, name))
     #else:
       # consonant data
