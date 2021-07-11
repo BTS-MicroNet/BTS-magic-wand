@@ -145,7 +145,7 @@ if __name__ == "__main__":
         for idx3, size in enumerate(sizes):
           prepare_original_data(folder, name, data,
                                 "./data/%s/%s/%s.txt" % (folder, size, name))
-    else:
+    #else:
       # consonant data
       #for idx2, name in enumerate(consonants):
       #  for idx3, size in enumerate(sizes):
