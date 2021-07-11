@@ -32,7 +32,7 @@ import tensorflow as tf
 
 logdir = "logs/scalars/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
-early_stop_callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, mode='auto')
+# early_stop_callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, mode='auto')
 
 def reshape_function(data, label):
   reshaped_data = tf.reshape(data, [-1, 3, 1])
@@ -144,7 +144,7 @@ def train_net(
       validation_data=valid_data,
       steps_per_epoch=1000,
       validation_steps=int((valid_len - 1) / batch_size + 1),
-      callbacks=[tensorboard_callback, early_stop_callback])
+      callbacks=[tensorboard_callback])
   loss, acc = model.evaluate(test_data)
   pred = np.argmax(model.predict(test_data), axis=1)
   confusion = tf.math.confusion_matrix(
