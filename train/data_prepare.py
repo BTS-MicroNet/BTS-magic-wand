@@ -37,6 +37,7 @@ import random
 LABEL_NAME = "gesture"
 DATA_NAME = "accel_ms2_xyz"
 folders = ["vowel", "consonant"]
+sizes = ["small", "medium", "large"]
 vowels = [
     "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ",
     "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ",
@@ -140,12 +141,14 @@ if __name__ == "__main__":
   for idx1, folder in enumerate(folders):
     # vowel data
     for idx2, name in enumerate(vowels):
-      prepare_original_data(folder, name, data,
-                            "./%s/%s.txt" % (folder, name))
+      for idx3, size in enumerate(sizes):
+        prepare_original_data(folder, name, data,
+                              "./%s/%s/%s.txt" % (folder, size, name))
     # consonant data
     for idx2, name in enumerate(consonants):
-      prepare_original_data(folder, name, data,
-                            "./%s/%s.txt" % (folder, name))
+      for idx3, size in enumerate(sizes):
+        prepare_original_data(folder, name, data,
+                              "./%s/%s/%s.txt" % (folder, size, name))
   #generate_negative_data(data)
   print("data_length: " + str(len(data)))
   if not os.path.exists("./data"):
