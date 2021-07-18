@@ -86,7 +86,7 @@ def generate_negative_data(data):  # pylint: disable=redefined-outer-name
     x_increase = (random.random() - 0.5) * 10
     y_increase = (random.random() - 0.5) * 10
     z_increase = (random.random() - 0.5) * 10
-    for j in range(180):
+    for j in range(315):
       dic[DATA_NAME].append([
           start_x + j * x_increase + (random.random() - 0.5) * 6,
           start_y + j * y_increase + (random.random() - 0.5) * 6,
@@ -101,7 +101,7 @@ def generate_negative_data(data):  # pylint: disable=redefined-outer-name
       dic = {DATA_NAME: [], LABEL_NAME: "negative", "name": "negative7"}
     else:
       dic = {DATA_NAME: [], LABEL_NAME: "negative", "name": "negative6"}
-    for j in range(180):
+    for j in range(315):
       dic[DATA_NAME].append([(random.random() - 0.5) * 1000,
                              (random.random() - 0.5) * 1000,
                              (random.random() - 0.5) * 1000])
@@ -117,7 +117,7 @@ def generate_negative_data(data):  # pylint: disable=redefined-outer-name
     start_x = (random.random() - 0.5) * 2000
     start_y = (random.random() - 0.5) * 2000
     start_z = (random.random() - 0.5) * 2000
-    for j in range(180):
+    for j in range(315):
       dic[DATA_NAME].append([
           start_x + (random.random() - 0.5) * 40,
           start_y + (random.random() - 0.5) * 40,
