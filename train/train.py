@@ -27,12 +27,22 @@ import datetime
 import os
 from data_load import DataLoader
 
+import datetime
 import numpy as np
 import tensorflow as tf
 
 logdir = "logs/scalars/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
 # early_stop_callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, mode='auto')
+
+current = datetime.datetime.now()
+checkpoint_filepath = '/train/checkpoint/' + str(current)
+model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+    filepath=checkpoint_filepath,
+    save_weights_only=True,
+    monitor='val_accuracy',
+    mode='max',
+    save_best_only=True)
 
 def reshape_function(data, label):
   reshaped_data = tf.reshape(data, [-1, 3, 1])
@@ -144,7 +154,7 @@ def train_net(
       validation_data=valid_data,
       steps_per_epoch=1000,
       validation_steps=int((valid_len - 1) / batch_size + 1),
-      callbacks=[tensorboard_callback])
+      callbacks=[tensorboard_callback, model_checkpoint_callback])
   loss, acc = model.evaluate(test_data)
   pred = np.argmax(model.predict(test_data), axis=1)
   confusion = tf.math.confusion_matrix(
@@ -195,25 +205,35 @@ if __name__ == "__main__":
 
   print("Start to build net...")
   # model, model_path = build_net(args, seq_length)
+  # filters,
+  # kernel_size,
+  # strides = (1, 1),
+  # padding = 'valid',
+  # data_format = None,
+  # dilation_rate = (1, 1),
+  # activation = None,
+  # use_bias = True,
+  # 35 classes
   model = tf.keras.Sequential([
       tf.keras.layers.Conv2D(
-          42, (4, 3),
+          70, (4, 3),
           padding="same",
           activation="relu",
-          input_shape=(seq_length, 3, 1)),  # output_shape=(batch, 128, 3, 8)
-      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 8)
-      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
-      tf.keras.layers.Conv2D(84, (21, 1), padding="same",
+          input_shape=(seq_length, 3, 1)),  # output_shape=(batch, 128, 3, 70)
+      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 70)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 70)
+      tf.keras.layers.Conv2D(140, (4, 1), padding="same",
                              activation="relu"),  # (batch, 42, 1, 16)
       tf.keras.layers.MaxPool2D((3, 1), padding="same"),  # (batch, 14, 1, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
       tf.keras.layers.Flatten(),  # (batch, 224)
-      tf.keras.layers.Dense(84, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 16)
-      tf.keras.layers.Dense(21, activation="softmax")  # (batch, 4)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
   ])
 
   print("Start training...")
+  print(model.summary())
   # train_net(model, model_path, train_len, train_data, valid_len, valid_data,
   #           test_len, test_data, args.model)
   train_net(model, train_len, train_data, valid_len, valid_data,
