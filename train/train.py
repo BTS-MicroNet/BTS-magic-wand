@@ -235,13 +235,13 @@ if __name__ == "__main__":
 
   model1 = tf.keras.Sequential([
       tf.keras.layers.Conv2D(
-          4, (4, 3),
+          8, (4, 3),
           padding="same",
           activation="relu",
           input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
       tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
       tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
-      tf.keras.layers.Conv2D(8, (4, 1), padding="same",
+      tf.keras.layers.Conv2D(16, (4, 1), padding="same",
                              activation="relu"),  # (batch, 42, 1, 16)
       tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
@@ -250,13 +250,30 @@ if __name__ == "__main__":
       tf.keras.layers.Dropout(0.1),  # (batch, 16)
       tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
   ])
+  model2 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((4, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      # tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+      #                        activation="relu"),  # (batch, 42, 1, 16)
+      # tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      # tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      # tf.keras.layers.Dense(70, activation="relu"),  # (batch, 16)
+      # tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
 
   print("Start training...")
-  print(model1.summary())
-  print(calculate_model_size(model1))
+  print(model2.summary())
+  print(calculate_model_size(model2))
   # train_net(model, model_path, train_len, train_data, valid_len, valid_data,
   #           test_len, test_data, args.model)
-  train_net(model1, train_len, train_data, valid_len, valid_data,
+  train_net(model2, train_len, train_data, valid_len, valid_data,
             test_len, test_data, args.model)
 
   print("Training finished!")
