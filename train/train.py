@@ -215,7 +215,7 @@ if __name__ == "__main__":
   # activation = None,
   # use_bias = True,
   # 35 classes
-  model1 = tf.keras.Sequential([
+  model = tf.keras.Sequential([
       tf.keras.layers.Conv2D(
           4, (4, 3),
           padding="same",
