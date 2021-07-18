@@ -45,8 +45,7 @@ vowels = [
 ]
 consonants = [
     "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ",
-    "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ",
-    "ㅃ", "ㅆ", "ㅉ"
+    "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
 ]
 
 
@@ -145,12 +144,12 @@ if __name__ == "__main__":
         for idx3, size in enumerate(sizes):
           prepare_original_data(name, folder, data,
                                 "./data/%s/%s/%s.txt" % (folder, size, name))
-    #else:
+    elif folder == "consonant":
       # consonant data
-      #for idx2, name in enumerate(consonants):
-      #  for idx3, size in enumerate(sizes):
-      #    prepare_original_data(folder, name, data,
-      #                          "./data/%s/%s/%s.txt" % (folder, size, name))
+      for idx2, name in enumerate(consonants):
+       for idx3, size in enumerate(sizes):
+         prepare_original_data(folder, name, data,
+                               "./data/%s/%s/%s.txt" % (folder, size, name))
   #generate_negative_data(data)
   print("data_length: " + str(len(data)))
   if not os.path.exists("./data"):
