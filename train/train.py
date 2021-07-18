@@ -42,6 +42,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     save_weights_only=True,
     monitor='val_accuracy',
     mode='max',
+    save_freq='epoch',
     save_best_only=True)
 
 def reshape_function(data, label):
