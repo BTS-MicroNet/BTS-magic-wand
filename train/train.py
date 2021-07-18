@@ -36,7 +36,7 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
 # early_stop_callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, mode='auto')
 
 current = datetime.datetime.now()
-checkpoint_filepath = '/train/checkpoint/' + str(current)
+checkpoint_filepath = './' + str(current) + '_ckpt'
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     filepath=checkpoint_filepath,
     save_weights_only=True,
@@ -160,7 +160,7 @@ def train_net(
   confusion = tf.math.confusion_matrix(
       labels=tf.constant(test_labels),
       predictions=tf.constant(pred),
-      num_classes=21)
+      num_classes=35)
   print(confusion)
   print("Loss {}, Accuracy {}".format(loss, acc))
   # Convert the model to the TensorFlow Lite format without quantization
@@ -216,21 +216,22 @@ if __name__ == "__main__":
   # 35 classes
   model = tf.keras.Sequential([
       tf.keras.layers.Conv2D(
-          70, (4, 3),
+          35, (4, 3),
           padding="same",
           activation="relu",
-          input_shape=(seq_length, 3, 1)),  # output_shape=(batch, 128, 3, 70)
-      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 70)
-      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 70)
-      tf.keras.layers.Conv2D(140, (4, 1), padding="same",
+          input_shape=(seq_length, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(70, (4, 1), padding="same",
                              activation="relu"),  # (batch, 42, 1, 16)
       tf.keras.layers.MaxPool2D((3, 1), padding="same"),  # (batch, 14, 1, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
       tf.keras.layers.Flatten(),  # (batch, 224)
-      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dense(70, activation="relu"),  # (batch, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 16)
       tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
   ])
+
 
   print("Start training...")
   print(model.summary())
