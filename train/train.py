@@ -234,6 +234,7 @@ if __name__ == "__main__":
 
   print("Start training...")
   print(model.summary())
+  print(calculate_model_size(model))
   # train_net(model, model_path, train_len, train_data, valid_len, valid_data,
   #           test_len, test_data, args.model)
   train_net(model, train_len, train_data, valid_len, valid_data,
