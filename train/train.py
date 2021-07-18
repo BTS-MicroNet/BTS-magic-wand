@@ -221,7 +221,7 @@ if __name__ == "__main__":
           padding="same",
           activation="relu",
           input_shape=(160, 3, 1)),  # output_shape=(batch, 128, 3, 8)
-      tf.keras.layers.MaxPool2D((2, 2)),  # (batch, 42, 1, 8)
+      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 8)
       tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
       tf.keras.layers.Conv2D(8, (4, 1), padding="same",
                              activation="relu"),  # (batch, 42, 1, 16)
