@@ -52,7 +52,7 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, int kind) {
         "SLOPE:\n\r        *\n\r       *\n\r      *\n\r     *\n\r    "
         "*\n\r   *\n\r  *\n\r * * * * * * * *\n\r");
   }*/
-  TF_LITE_REPORT_ERROR(error_reporter, "%d\n", kind);
+  Serial.print(kind);
 }
 
 #endif  // ARDUINO_EXCLUDE_CODE

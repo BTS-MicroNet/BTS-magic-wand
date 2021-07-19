@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+.DS_Store
+src/.DS_Store
+src/.DS_Store
+src/magic_wand/.DS_Store
+tensorflow/.DS_Store
+src/magic_wand/tensorflow_lite/.DS_Store
