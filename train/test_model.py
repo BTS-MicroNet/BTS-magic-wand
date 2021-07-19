@@ -39,7 +39,7 @@ model1 = tf.keras.Sequential([
       tf.keras.layers.MaxPool2D((5, 1), padding="same"),  # (batch, 14, 1, 16)
       tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
       tf.keras.layers.Flatten(),  # (batch, 224)
-      # tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dense(70, activation="relu"),  # (batch, 16)
       # tf.keras.layers.Dropout(0.1),  # (batch, 16)
       tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
   ])
