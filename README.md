@@ -1,5 +1,7 @@
 # BTS Magic Wand
 
+![bts-maginc-wand-demo](./images/1_2.gif)
+
 ## Goal
 
 *Handwrite the Korean alphabet, Hangul, like a native.*
@@ -7,6 +9,12 @@
 ## Description
 
 **BTS Magic Wand** lets you improve your Hangul handwriting! Using an Arduino, IMU sensor, and TensorFlow Lite for Microcontrollers, we trained a tiny machine learning model to recognize the Korean alphabet, Hangul, you are writing.
+
+<p align="center">
+	<img src = './images/2.gif' width=300/>
+	<img src = './images/3.gif'width=300/>
+</p>
+
 
 For the handwritten Hangul dataset, we wrote consonants and vowels of Hangul in various sizes (e.g., small, medium, and large) with an Arduino-connected pen. Using the Arduino board, we collected three-axis gyroscope data per alphabet. Then, we trained a CNN model using the gyroscope data.
 
@@ -19,3 +27,7 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 - Microcontroller: Arduino Nano 33 BLE (with IMU sensor)
 - Tensorflow 2.0 (tf.Keras), TensorFlow Lite
 - CNN / LSTM, Network Optimization, Post-training Quantization
+
+## Visit our Official Website 🔗
+
+https://bts-micronet.github.io/
