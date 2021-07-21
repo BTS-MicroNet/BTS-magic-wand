@@ -89,7 +89,7 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 ### Pre-requisites
 - Your own deployment platform (Arduino, Sparkfun Edge etc.)
 - [Arduino IDE installation](https://www.arduino.cc/en/software)
-- `Tensorflow >= 2.0` 
+- `tensorflow>=2.4.0`,  
 
 1. Install libraries on Arduino IDE.
 
@@ -129,3 +129,8 @@ Copyright 2021 BTS-MicroNet. https://bts-micronet.github.io/. All Rights Reserve
   	<br/><br/>
 	<img src = './images/team_butler.png' width=1000/>
 </p>
+
+## Reference
+
+- [tensorflow github](https://github.com/tensorflow/tensorflow)
+- [tflite-micro github](https://github.com/tensorflow/tflite-micro) (Similar with original tensorflow github, some renewal updates for `micro` parts for tensorflow lite are included.)
