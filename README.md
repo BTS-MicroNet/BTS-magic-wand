@@ -52,15 +52,18 @@ For the handwritten Hangul dataset, we wrote consonants and vowels of Hangul in 
 
 If you start writing Hangul with the Arduino-connected pen, this experiment first captures IMU data from the board. Then, based on a pre-trained CNN model, it labels the captured data with matching Hangul alphabet. Through the text displayed on the screen, you can check and correct your Hangul handwriting.
 
-Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands. ***Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷***
+Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands. 
+***Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷 ***
 
 ## List of Technologies Used
 
 <p align="center">
 	<br/>
-	<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1024px-Arduino_Logo.svg.png' height=200/> &nbsp; &nbsp; &nbsp;
-  <img src = 'https://kr.mouser.com/images/marketingid/2019/img/128734529.png?v=051920.1122' height=200/> &nbsp; &nbsp; &nbsp;
-	<img src = 'https://blog.kakaocdn.net/dn/blU1v3/btqDbEfmXvV/bnHgpmcUY24og8vgSoZkB1/img.png' height=200/>
+	<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1024px-Arduino_Logo.svg.png' height=180/> 
+	&nbsp; &nbsp; &nbsp;
+  	<img src = 'https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/500x375/f8876a31b63532bbba4e781c30024a0a/a/b/abx00030_back.jpg' height=180/> 
+	&nbsp; &nbsp; &nbsp;
+	<img src = 'https://blog.kakaocdn.net/dn/blU1v3/btqDbEfmXvV/bnHgpmcUY24og8vgSoZkB1/img.png' height=180/>
 	<br/>
 </p>
 
@@ -72,7 +75,26 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 
 ## Getting Started
 
-https://github.com/BTS-MicroNet/BTS-magic-wand/blob/main/src/magic_wand/arduino/examples/magic_wand/main.ino
+### Pre-requisites
+- Your own deployment platform (Arduino, Sparkfun Edge etc.)
+- [Arduino IDE installation](https://www.arduino.cc/en/software)
+- `Tensorflow >= 2.0` 
+
+1. Install libraries on Arduino IDE.
+
+	- Essential library for your own deployment platform (In our case, `Arduino LSM9DS1` for Arduino Nano 33 BLE  ***by Arduino***)
+	- `Arduino_TensorflowLite` ***by Peter Warden***
+
+2. Clone the project.
+
+	```bash
+	# Compiled files for Arduino exists in this directory.
+	cd blob/main/src/magic_wand/arduino/examples/magic_wand
+	open main.ino
+	```
+3. Upload the project on your device and run it !
+
+	***If you have any issues, Plz report us via [this channel](https://github.com/BTS-MicroNet/BTS-magic-wand/issues).***
 
 ## Visit our Official Website 🔗
 
