@@ -2,9 +2,10 @@
 
 <p align="center">
 	<br/>
-	<img src = 'https://img.shields.io/github/stars/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
-	<img src = 'https://img.shields.io/github/issues/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
-	<img src = 'https://img.shields.io/github/license/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
+	<img src = 'https://img.shields.io/github/stars/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor&color=yellow'/>
+	<img src = 'https://img.shields.io/badge/PR-ALWAYS_WELCOME-red?style=for-the-badge&logo=appveyor'/>
+	<img src = 'https://img.shields.io/github/issues/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor&color=green'/>
+	<img src = 'https://img.shields.io/github/license/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor&color=green'/>
 	<br/>
 </p>
 
@@ -59,11 +60,11 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 
 <p align="center">
 	<br/>
-	<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1024px-Arduino_Logo.svg.png' height=180/> 
+	<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1024px-Arduino_Logo.svg.png' height=150/> 
 	&nbsp; &nbsp; &nbsp;
-  	<img src = 'https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/500x375/f8876a31b63532bbba4e781c30024a0a/a/b/abx00030_back.jpg' height=180/> 
+  	<img src = 'https://store-cdn.arduino.cc/usa/catalog/product/cache/1/image/500x375/f8876a31b63532bbba4e781c30024a0a/a/b/abx00030_back.jpg' height=150/> 
 	&nbsp; &nbsp; &nbsp;
-	<img src = 'https://blog.kakaocdn.net/dn/blU1v3/btqDbEfmXvV/bnHgpmcUY24og8vgSoZkB1/img.png' height=180/>
+	<img src = 'https://blog.kakaocdn.net/dn/blU1v3/btqDbEfmXvV/bnHgpmcUY24og8vgSoZkB1/img.png' height=150/>
 	<br/>
 </p>
 
