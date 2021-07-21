@@ -59,8 +59,11 @@ For the handwritten Hangul dataset, we wrote consonants and vowels of Hangul in 
 
 If you start writing Hangul with the Arduino-connected pen, this experiment first captures IMU data from the board. Then, based on a pre-trained CNN model, it labels the captured data with matching Hangul alphabet. Through the text displayed on the screen, you can check and correct your Hangul handwriting.
 
-Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands. 
-***Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷 ***
+Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands.
+
+***Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷***
+
+<br/>
 
 ## List of Technologies Used
 
@@ -79,6 +82,8 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 - Tensorflow 2.0 (tf.Keras), TensorFlow Lite
 - CNN / LSTM, Network Optimization, Post-training Quantization
 
+<br/>
+
 ## Getting Started
 
 ### Pre-requisites
@@ -88,7 +93,7 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 
 1. Install libraries on Arduino IDE.
 
-	- Essential library for your own deployment platform (In our case, `Arduino LSM9DS1` for Arduino Nano 33 BLE  ***by Arduino***)
+	- Essential library for your own deployment platform (In our case, `Arduino LSM9DS1` ***by Arduino***)
 	- `Arduino_TensorflowLite` ***by Peter Warden***
 
 2. Clone the project.
@@ -102,10 +107,13 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 
 	***If you have any issues, Plz report us via [this channel](https://github.com/BTS-MicroNet/BTS-magic-wand/issues).***
 
+<br/>
 
 ## Visit our Official Website 🔗
 
 https://bts-micronet.github.io/
+
+<br/>
 
 ## License
 `BTS-magic-wand` is licensed under the terms of the MIT License.
@@ -118,6 +126,6 @@ Copyright 2021 BTS-MicroNet. https://bts-micronet.github.io/. All Rights Reserve
 
 <p align="center">
 	<b><i> Big Congrats. to BTS 'Butter' and 'Permission to Dance' have won Billboard 1st 🏆 </i></b>
-  <br/><br/>
+  	<br/><br/>
 	<img src = './images/team_butler.png' width=1000/>
 </p>
