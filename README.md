@@ -68,7 +68,6 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 </p>
 
 
-
 - Microcontroller: Arduino Nano 33 BLE (with IMU sensor)
 - Tensorflow 2.0 (tf.Keras), TensorFlow Lite
 - CNN / LSTM, Network Optimization, Post-training Quantization
@@ -95,6 +94,7 @@ Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately 
 3. Upload the project on your device and run it !
 
 	***If you have any issues, Plz report us via [this channel](https://github.com/BTS-MicroNet/BTS-magic-wand/issues).***
+
 
 ## Visit our Official Website 🔗
 
