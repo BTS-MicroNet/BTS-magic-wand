@@ -37,7 +37,13 @@
 
 ## Goal
 
-***Handwrite the Korean alphabet, Hangul, like a native.***
+<p align="center">
+	<img src = './images/writing.png'/>
+  <br/><br/>
+	<b><i>Handwrite the Korean alphabet, Hangul, like a native.</i></b>
+</p>
+
+
 
 ## Description
 
