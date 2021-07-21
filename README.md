@@ -1,6 +1,19 @@
-# BTS Magic Wand
+<h1 align='center'> BTS Magic Wand </h1>
 
-![bts-maginc-wand-demo](./images/1_2.gif)
+<p align="center">
+	<br/>
+	<img src = 'https://img.shields.io/github/stars/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
+	<img src = 'https://img.shields.io/github/issues/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
+	<img src = 'https://img.shields.io/github/license/BTS-MicroNet/BTS-magic-wand?style=for-the-badge&logo=appveyor'/>
+	<br/>
+</p>
+
+<h2 align='center'> Try <i> BTS Magic Wand </i> to write BTS members' names in Korean! 🇰🇷 </h2>
+
+<p align="center">
+	<img src = './images/1_2.gif'/>
+	<br/>
+</p>
 
 ## Goal
 
@@ -20,7 +33,7 @@ For the handwritten Hangul dataset, we wrote consonants and vowels of Hangul in 
 
 If you start writing Hangul with the Arduino-connected pen, this experiment first captures IMU data from the board. Then, based on a pre-trained CNN model, it labels the captured data with matching Hangul alphabet. Through the text displayed on the screen, you can check and correct your Hangul handwriting.
 
-Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands. Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷
+Ultimately, with BTS Magic Wand, you can write and learn Hangul more accurately with your own hands. **Try BTS Magic Wand to write BTS members' names in Korean! 🇰🇷**
 
 ## List of Technologies Used
 
