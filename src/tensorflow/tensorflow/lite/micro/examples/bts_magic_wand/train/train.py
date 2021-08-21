@@ -27,12 +27,23 @@ import datetime
 import os
 from data_load import DataLoader
 
+import datetime
 import numpy as np
 import tensorflow as tf
 
 logdir = "logs/scalars/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
+# early_stop_callback = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=30, mode='auto')
 
+current = datetime.datetime.now()
+checkpoint_filepath = './' + str(current) + '_ckpt'
+model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+    filepath=checkpoint_filepath,
+    save_weights_only=True,
+    monitor='val_accuracy',
+    mode='max',
+    save_freq='epoch',
+    save_best_only=True)
 
 def reshape_function(data, label):
   reshaped_data = tf.reshape(data, [-1, 3, 1])
@@ -110,7 +121,7 @@ def build_net(args, seq_length):
 
 def train_net(
     model,
-    model_path,  # pylint: disable=unused-argument
+    # model_path,  # pylint: disable=unused-argument
     train_len,  # pylint: disable=unused-argument
     train_data,
     valid_len,
@@ -120,7 +131,7 @@ def train_net(
     kind):
   """Trains the model."""
   calculate_model_size(model)
-  epochs = 50
+  epochs = 470
   batch_size = 64
   model.compile(
       optimizer="adam",
@@ -144,13 +155,13 @@ def train_net(
       validation_data=valid_data,
       steps_per_epoch=1000,
       validation_steps=int((valid_len - 1) / batch_size + 1),
-      callbacks=[tensorboard_callback])
+      callbacks=[tensorboard_callback, model_checkpoint_callback])
   loss, acc = model.evaluate(test_data)
   pred = np.argmax(model.predict(test_data), axis=1)
   confusion = tf.math.confusion_matrix(
       labels=tf.constant(test_labels),
       predictions=tf.constant(pred),
-      num_classes=4)
+      num_classes=35)
   print(confusion)
   print("Loss {}, Accuracy {}".format(loss, acc))
   # Convert the model to the TensorFlow Lite format without quantization
@@ -162,7 +173,7 @@ def train_net(
 
   # Convert the model to the TensorFlow Lite format with quantization
   converter = tf.lite.TFLiteConverter.from_keras_model(model)
-  converter.optimizations = [tf.lite.Optimize.DEFAULT]
+  converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
   tflite_model = converter.convert()
 
   # Save the model to disk
@@ -182,7 +193,7 @@ if __name__ == "__main__":
   parser.add_argument("--person", "-p")
   args = parser.parse_args()
 
-  seq_length = 128
+  seq_length = 140
 
   print("Start to load data...")
   if args.person == "true":
@@ -194,10 +205,142 @@ if __name__ == "__main__":
         load_data("./data/train", "./data/valid", "./data/test", seq_length)
 
   print("Start to build net...")
-  model, model_path = build_net(args, seq_length)
+  # model, model_path = build_net(args, seq_length)
+  # filters,
+  # kernel_size,
+  # strides = (1, 1),
+  # padding = 'valid',
+  # data_format = None,
+  # dilation_rate = (1, 1),
+  # activation = None,
+  # use_bias = True,
+  # 35 classes
+  model1 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          4, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((3, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(8, (4, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((3, 1), padding="same"),  # (batch, 14, 1, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
 
+  model1 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
+  model2 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((4, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      # tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+      #                        activation="relu"),  # (batch, 42, 1, 16)
+      # tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      # tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      # tf.keras.layers.Dense(70, activation="relu"),  # (batch, 16)
+      # tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
+  model3 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(70, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
+  model4 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.3),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      tf.keras.layers.Dropout(0.5),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dropout(0.5),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
+  model5 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
+      # tf.keras.layers.Dropout(0.3),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(16, (4, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      # tf.keras.layers.Dropout(0.5),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      # tf.keras.layers.Dropout(0.5),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
+  model6 = tf.keras.Sequential([
+      tf.keras.layers.Conv2D(
+          8, (4, 3),
+          padding="same",
+          activation="relu",
+          input_shape=(140, 3, 1)),  # output_shape=(batch, 128, 3, 8)
+      tf.keras.layers.MaxPool2D((2, 3)),  # (batch, 42, 1, 8)
+      tf.keras.layers.Dropout(0.1),  # (batch, 42, 1, 8)
+      tf.keras.layers.Conv2D(16, (5, 1), padding="same",
+                             activation="relu"),  # (batch, 42, 1, 16)
+      tf.keras.layers.MaxPool2D((2, 1), padding="same"),  # (batch, 14, 1, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 14, 1, 16)
+      tf.keras.layers.Flatten(),  # (batch, 224)
+      tf.keras.layers.Dense(140, activation="relu"),  # (batch, 16)
+      tf.keras.layers.Dropout(0.1),  # (batch, 16)
+      tf.keras.layers.Dense(35, activation="softmax")  # (batch, 4)
+  ])
   print("Start training...")
-  train_net(model, model_path, train_len, train_data, valid_len, valid_data,
+  print(model6.summary())
+  print(calculate_model_size(model6))
+  # train_net(model, model_path, train_len, train_data, valid_len, valid_data,
+  #           test_len, test_data, args.model)
+  train_net(model6, train_len, train_data, valid_len, valid_data,
             test_len, test_data, args.model)
 
   print("Training finished!")
